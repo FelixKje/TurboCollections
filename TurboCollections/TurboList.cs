@@ -24,6 +24,10 @@ namespace TurboCollections{
             return items[index];
         }
 
+        public T Set(T item, int index){
+            return items[index] = item;
+        }
+
         public void Clear(){
             items = Array.Empty<T>();
         }

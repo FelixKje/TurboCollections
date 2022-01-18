@@ -33,6 +33,16 @@ namespace TurboCollections.Test{
         }
         
         [Test]
+        public void OverideAnExistingItemOnListAndReturnNew(){
+            var list = new TurboList<int>();
+            list.Add(1337);
+            list.Add(23);
+            list.Add(26);
+            list.Set(23, 2);
+            Assert.AreEqual(23, list.Get(2));
+        }
+        
+        [Test]
         public void ClearingTheListOfAll(){
             var list = new TurboList<int>();
             list.Add(5);
