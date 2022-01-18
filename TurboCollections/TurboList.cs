@@ -66,5 +66,9 @@ namespace TurboCollections{
                 RemoveAt(IndexOf(item));
             }
         }
+
+        public object this[int i]{
+            get{ throw new NotImplementedException(); }
+        }
     }
 }
