@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace TurboCollections{
     public class TurboList<T>{
@@ -37,6 +38,15 @@ namespace TurboCollections{
             }
             items = newArray;
             Console.WriteLine(String.Join("," , newArray));
+        }
+
+        public bool Contains(T item){
+            for (int i = 0; i < items.Length; i++){
+                if (item.Equals(items[i])){
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

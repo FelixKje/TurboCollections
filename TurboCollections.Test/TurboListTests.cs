@@ -52,5 +52,18 @@ namespace TurboCollections.Test{
             
             Assert.AreEqual(3 , list.Count);
         }
+        [Test]
+        public void CheckIfValueExistsInList(){
+            var list = new TurboList<int>();
+            list.Add(1);
+            list.Add(2);
+            list.Add(5);
+            list.Add(5);
+            var shouldBeTrue = list.Contains(5);
+            var shouldBeFalse = list.Contains(4);
+
+            Assert.IsTrue(shouldBeTrue);
+            Assert.IsFalse(shouldBeFalse);
+        }
     }
 }
