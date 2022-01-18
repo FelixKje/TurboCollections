@@ -71,9 +71,29 @@ namespace TurboCollections.Test{
             list.Add(3);
             list.Add(7);
             list.Add(45);
+            
+            Console.WriteLine("45 " + list.IndexOf(45));
+            Console.WriteLine("5 " + list.IndexOf(5));
 
             Assert.AreEqual(2, list.IndexOf(45));
             Assert.AreEqual(-1, list.IndexOf(5));
+        }
+        [Test]
+        public void RemoveFirstItemYouInputThenReturns(){
+            var list = new TurboList<int>();
+            list.Add(3);
+            list.Add(7);
+            list.Add(45);
+            list.Add(45);
+            list.Add(45);
+            list.Remove(3);
+            list.Remove(45);
+
+            
+            Console.WriteLine(list);
+            
+            
+            Assert.AreEqual(3,list.Count);
         }
     }
 }

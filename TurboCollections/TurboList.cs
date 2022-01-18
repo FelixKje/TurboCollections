@@ -37,7 +37,6 @@ namespace TurboCollections{
                 newArray[i] = items[i];
             }
             items = newArray;
-            Console.WriteLine(String.Join("," , newArray));
         }
 
         public bool Contains(T item){
@@ -46,7 +45,6 @@ namespace TurboCollections{
                     return true;
                 }
             }
-
             return false;
         }
 
@@ -57,6 +55,12 @@ namespace TurboCollections{
                 }
             }
             return -1;
+        }
+
+        public void Remove(T item){
+            if (Contains(item)){
+                RemoveAt(IndexOf(item));
+            }
         }
     }
 }
