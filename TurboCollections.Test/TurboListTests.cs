@@ -65,5 +65,15 @@ namespace TurboCollections.Test{
             Assert.IsTrue(shouldBeTrue);
             Assert.IsFalse(shouldBeFalse);
         }
+        [Test]
+        public void ReturnIndexOfItemIfItExistsElseMinusOne(){
+            var list = new TurboList<int>();
+            list.Add(3);
+            list.Add(7);
+            list.Add(45);
+
+            Assert.AreEqual(2, list.IndexOf(45));
+            Assert.AreEqual(-1, list.IndexOf(5));
+        }
     }
 }

@@ -41,12 +41,22 @@ namespace TurboCollections{
         }
 
         public bool Contains(T item){
-            for (int i = 0; i < items.Length; i++){
-                if (item.Equals(items[i])){
+            foreach (var t in items){
+                if (item.Equals(t)){
                     return true;
                 }
             }
+
             return false;
+        }
+
+        public int IndexOf(T item){
+            for (int i = 0; i < items.Length; i++){
+                if (item.Equals(items[i])){
+                    return i;
+                }
+            }
+            return -1;
         }
     }
 }
