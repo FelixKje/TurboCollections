@@ -18,5 +18,9 @@ namespace TurboCollections{
 
             items = newArray;
         }
+
+        public T Peek(){
+            return items[Count -1];
+        }
     }
 }

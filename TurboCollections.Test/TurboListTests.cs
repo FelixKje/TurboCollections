@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace TurboCollections.Test{
     public class TurboListTests{
         [Test]
-        public void NewLisIsEmpty(){
+        public void NewListIsEmpty(){
             var list = new TurboList<int>();
             Assert.Zero(list.Count);
         }
