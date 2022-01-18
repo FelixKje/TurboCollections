@@ -44,8 +44,8 @@ namespace TurboCollections{
         }
 
         public bool Contains(T item){
-            foreach (var t in items){
-                if (item.Equals(t)){
+            foreach (var _item in items){
+                if (item.Equals(_item)){
                     return true;
                 }
             }
