@@ -7,8 +7,7 @@ using System.Linq;
 
 namespace TurboCollections{
     public class TurboList<T> : IEnumerable<T>{
-
-
+        
         public int Count{ get; private set; }
 
         T[] items = Array.Empty<T>();
@@ -46,7 +45,6 @@ namespace TurboCollections{
             Count = 0;
         }
         
-        // removes one item from the list. If the 4th item is removed, then the 5th item becomes the 4th, the 6th becomes the 5th and so on.
         public void RemoveAt(int index){
             for (int i = index; i < Count - 1; i++){
                 items[i] = items[i + 1];

@@ -12,6 +12,8 @@ namespace TurboCollections{
         }
 
         void EnsureSize(int size){
+            if (size <= 0)
+                return;
 
             T[] newArray = new T[size];
             for (int i = 0; i < Count; i++){
@@ -25,7 +27,7 @@ namespace TurboCollections{
         }
 
         public T Yeet(){
-            var item = items[Count - 1];
+            var item = Peek();
             EnsureSize(Count--);
             return item;
         }
