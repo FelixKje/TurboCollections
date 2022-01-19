@@ -2,36 +2,39 @@
 
 namespace TurboCollections{
     public class TurboStack<T>{
-        // returns the current amount of items contained in the stack.
-        public int Count => items.Length;
+        public int Count{ get; private set; }
 
         T[] items = Array.Empty<T>();
+        
+        public  void Push(T item){
+            EnsureSize(Count + 1);
+            items[Count++] = item;
+        }
 
-        // adds one item on top of the stack.
-        public void Push(T item){
-            T[] newArray = new T[Count + 1];
+        void EnsureSize(int size){
+
+            T[] newArray = new T[size];
             for (int i = 0; i < Count; i++){
                 newArray[i] = items[i];
             }
-
-            newArray[Count] = item;
-
             items = newArray;
         }
 
         public T Peek(){
-            return items[Count -1];
+            return items[Count - 1];
         }
 
         public T Yeet(){
-            var yeetedItem = items[Count - 1];
-            T[] newArray = new T[items.Length];
-            for (int i = 0; i < items.Length - 1; i++){
-                newArray[i] = items[i];
-            }
+            var item = items[Count - 1];
+            EnsureSize(Count--);
+            return item;
+        }
 
-            items = newArray;
-            return yeetedItem;
+        public void Clear(){
+            for (int i = 0; i < Count; i++){
+                items[i] = default;
+            }
+            Count = 0;
         }
     }
 }
