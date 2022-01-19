@@ -22,5 +22,16 @@ namespace TurboCollections{
         public T Peek(){
             return items[Count -1];
         }
+
+        public T Yeet(){
+            var yeetedItem = items[Count - 1];
+            T[] newArray = new T[items.Length];
+            for (int i = 0; i < items.Length - 1; i++){
+                newArray[i] = items[i];
+            }
+
+            items = newArray;
+            return yeetedItem;
+        }
     }
 }

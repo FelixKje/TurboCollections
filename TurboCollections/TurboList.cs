@@ -1,22 +1,33 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
 
 namespace TurboCollections{
-    public class TurboList<T>{
+    public class TurboList<T> : IEnumerable<T>{
 
-        
-        public int Count => items.Length;
-        
+
+        public int Count{ get; private set; }
+
         T[] items = Array.Empty<T>();
         
         public  void Add(T item){
-            T[] newArray = new T[Count + 1];
+            EnsureSize(Count + 1);
+            items[Count++] = item;
+        }
+
+        void EnsureSize(int size){
+            if (items.Length >= size)
+                return;
+            
+            int newSize = Math.Max(size, items.Length * 2);
+            
+            T[] newArray = new T[newSize];
             for (int i = 0; i < Count; i++){
                 newArray[i] = items[i];
             }
-            
-            newArray[Count] = item;
-            
             items = newArray;
         }
 
@@ -24,32 +35,27 @@ namespace TurboCollections{
             return items[index];
         }
 
-        public T Set(T item, int index){
-            return items[index] = item;
+        public void Set(int index, T item){
+            items[index] = item;
         }
 
         public void Clear(){
-            items = Array.Empty<T>();
+            for (int i = 0; i < Count; i++){
+                items[i] = default;
+            }
+            Count = 0;
         }
         
         // removes one item from the list. If the 4th item is removed, then the 5th item becomes the 4th, the 6th becomes the 5th and so on.
         public void RemoveAt(int index){
-            T[] newArray = new T[Count - 1];
-            for (int i = 0; i < Count-1; i++){
-                if (i >= index)
-                    newArray[i] = items[i+1]; 
-                newArray[i] = items[i];
+            for (int i = index; i < Count - 1; i++){
+                items[i] = items[i + 1];
             }
-            items = newArray;
+            Count--;
         }
 
         public bool Contains(T item){
-            foreach (var _item in items){
-                if (item.Equals(_item)){
-                    return true;
-                }
-            }
-            return false;
+            return IndexOf(item) != -1;
         }
 
         public int IndexOf(T item){
@@ -62,13 +68,56 @@ namespace TurboCollections{
         }
 
         public void Remove(T item){
-            if (Contains(item)){
-                RemoveAt(IndexOf(item));
+            var index = IndexOf(item);
+            if (index == -1 )
+                return;
+            RemoveAt(index);
+        }
+
+        public void AddRange(IEnumerable<T> items){
+            foreach (var item in items){
+                Add(item);
             }
         }
 
-        public object this[int i]{
-            get{ throw new NotImplementedException(); }
+        public Enumerator GetEnumerator(){
+            return new Enumerator(items, Count);
+        }
+        
+        IEnumerator<T> IEnumerable<T>.GetEnumerator(){
+            return GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator(){
+            return GetEnumerator();
+        }
+        public struct Enumerator : IEnumerator<T>{
+            readonly T[] _items;
+            readonly int _count;
+            int _index;
+
+            public Enumerator(T[] items, int count){
+                _items = items;
+                _count = count;
+                _index = -1;
+            }
+            public bool MoveNext(){
+                if (_index >= _count)
+                    return false;
+                return ++_index < _count;
+            }
+
+            public void Reset(){
+                _index = -1;
+            }
+
+            public T Current => _items[_index];
+
+            object IEnumerator.Current => Current;
+
+            public void Dispose(){
+                Reset();
+            }
         }
     }
 }

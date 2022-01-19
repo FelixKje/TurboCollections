@@ -27,5 +27,6 @@ namespace TurboCollections.Test{
             
             Assert.AreEqual(78, stack.Peek());
         }
+        
     }
 }
