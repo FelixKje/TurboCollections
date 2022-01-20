@@ -64,7 +64,56 @@ namespace TurboCollections.Test{
                 list.Dequeue();
             }
             Assert.AreEqual(11 , list.Peek());
-            Assert.AreEqual(numbers.Length , list.Count);
+        }
+
+        [Test]
+
+        public void CheckThatCountDecreasesWhenItemIsRemoved(){
+            var queue = new TurboQueue<int>();
+            queue.Enqueue(5);
+            Assert.AreEqual(1, queue.Count);
+            queue.Enqueue(3);
+            Assert.AreEqual(2, queue.Count);
+            queue.Dequeue();
+            Assert.AreEqual(1, queue.Count);
+        }
+        [Test]
+
+        public void CheckItemsAreAtRightIndex(){
+            var queue = new TurboQueue<int>();
+            queue.Enqueue(1); // 1
+            queue.Enqueue(2); // 2
+            queue.Enqueue(3); // 3
+            queue.Enqueue(4); // 4
+            Assert.AreEqual(1, queue.Dequeue()); // 3
+            queue.Enqueue(5); // 4
+            Assert.AreEqual(2, queue.Dequeue());// 3
+            queue.Enqueue(6); // 4
+            Assert.AreEqual(3, queue.Dequeue()); // 3
+            Assert.AreEqual(4, queue.Dequeue()); // 2
+            Assert.AreEqual(5, queue.Dequeue()); // 1
+            queue.Enqueue(7); // 2
+            queue.Enqueue(8); // 3
+            queue.Enqueue(9); // 4
+            Assert.AreEqual(6,queue.Dequeue()); // 3
+            Assert.AreEqual(7,queue.Dequeue());// 2
+            Assert.AreEqual(8,queue.Dequeue());// 1
+            Assert.AreEqual(9,queue.Dequeue());// 0
+        }
+        [Test]
+
+        public void CheckIfResizeArrayWorks(){
+            var queue = new TurboQueue<int>();
+            queue.Enqueue(1);
+            queue.Enqueue(2);
+            Assert.AreEqual(1,queue.Dequeue());
+            queue.Enqueue(3);
+            queue.Enqueue(4);
+            queue.Enqueue(5);
+            Assert.AreEqual(2,queue.Dequeue());
+            Assert.AreEqual(3,queue.Dequeue());
+            Assert.AreEqual(4,queue.Dequeue());
+            Assert.AreEqual(5,queue.Dequeue());
         }
         
         static (int[] numbers, TurboQueue<int>) CreateTestData()
