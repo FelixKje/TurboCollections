@@ -28,13 +28,43 @@ namespace TurboCollections.Test{
             Assert.AreEqual(4 , list.Peek());
         }
         [Test]
-        public void EnqueueAndDequeueTheFirstItemInQueue(){
+        public void DequeueTheFirstItemInQueue(){
             var list = new TurboQueue<int>();
             list.Enqueue(4);
             list.Enqueue(2);
 
 
             Assert.AreEqual(4 , list.Dequeue());
+        }
+        
+        [Test]
+        public void ClearQueueFromAllItems(){
+            var list = new TurboQueue<int>();
+            list.Enqueue(4);
+            list.Enqueue(2);
+            list.Enqueue(7);
+            list.Enqueue(87);
+            list.Enqueue(95);
+            list.Enqueue(23);
+            list.Clear();
+
+
+            Assert.AreEqual(0 , list.Count);
+        }
+        [Test]
+        public void DequeueAndCheckIfNextInQueue(){
+            var list = new TurboQueue<int>();
+            int[] numbers = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 , 10, 11, 12, 13 ,14 ,15 ,16, 10, 11, 12, 13 ,14 ,15 ,16};
+
+            for (int i = 0; i < numbers.Length; i++){
+                list.Enqueue(numbers[i]);
+            }
+
+            for (int i = 0; i < 11; i++){
+                list.Dequeue();
+            }
+            Assert.AreEqual(11 , list.Peek());
+            Assert.AreEqual(numbers.Length , list.Count);
         }
         
         static (int[] numbers, TurboQueue<int>) CreateTestData()
