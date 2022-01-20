@@ -1,10 +1,10 @@
-﻿using System;
+﻿
 
 namespace TurboCollections{
     public class TurboStack<T>{
         public int Count{ get; private set; }
 
-        T[] items = Array.Empty<T>();
+        T[] items = System.Array.Empty<T>();
         
         public  void Push(T item){
             EnsureSize(Count + 1);
