@@ -38,6 +38,10 @@ namespace TurboCollections{
             items[index] = item;
         }
 
+        public void Swap(int indexA, int indexB){
+            (items[indexB], items[indexA]) = (items[indexA], items[indexB]);
+        }
+
         public void Clear(){
             for (int i = 0; i < Count; i++){
                 items[i] = default;
@@ -46,9 +50,7 @@ namespace TurboCollections{
         }
         
         public void RemoveAt(int index){
-            for (int i = index; i < Count - 1; i++){
-                items[i] = items[i + 1];
-            }
+            Array.Copy(items,index + 1, items, index, Count - index - 1);
             Count--;
         }
 
