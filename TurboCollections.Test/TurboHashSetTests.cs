@@ -15,9 +15,11 @@ namespace TurboCollections.Test{
             }
 
             [Test]
-            public void OrdersAnUnorderedList(){
+            public void CheckBucketIfPeopleExists(){
                 var bucket = GiveUnordered();
-                
+                Assert.IsTrue(bucket.Exists("Felix"));
+                Assert.IsTrue(bucket.Exists("Kent"));
+                Assert.IsTrue(bucket.Exists("Arne"));
             }
         }
     }

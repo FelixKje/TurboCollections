@@ -41,7 +41,7 @@ namespace TurboCollections{
     }
 
         int Hash(T item){
-            var hash = item.GetHashCode();
+            var hash = Math.Abs(item.GetHashCode());
             hash %= buckets.Length;
             return hash;
         }
@@ -59,7 +59,7 @@ namespace TurboCollections{
             }
             buckets = newArray;
         }
-        bool Exists(T item){
+        public bool Exists(T item){
             var hash = Hash(item);
             if(item.Equals(buckets[hash])) 
                 return true;
